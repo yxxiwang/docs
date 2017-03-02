@@ -414,7 +414,7 @@ drwxr-xr-x  24 axu  staff   816  1 18 11:23 ta
 ```bash
 # 修改 {project_root}/cae/settings.py 的 `HANLP_LIB_DIR` 配置项
 # 修改为 `HanLP` 数据包目录
-> cae axu$ cat cae/settings.py | grep HANLP_LIB_DIR
+> cat cae/settings.py | grep HANLP_LIB_DIR
 
 HANLP_LIB_DIR = '/Users/axu/code/axuProject/Learn/learn_python/00.fixtures/02.hanlp'
 HANLP_CONF_DIR = HANLP_LIB_DIR  # 配置文件目录
