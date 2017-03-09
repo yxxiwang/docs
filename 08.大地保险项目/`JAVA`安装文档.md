@@ -157,6 +157,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.76-b04, mixed mode)
 > ll /ccicall/opt/
 total 4
 drwxr-xr-x. 8 ccicall ccicall 4096 Dec 19  2014 jdk1.7.0_76
+
+# 在`/usr/bin/`目录中创建软链接
+#!# 有的时候如果不在`/usr/bin/`目录中创建软链接的话，通过`ssh root@ip 'java -version'`会包找不到java的错误
+> su - 
+> ln -s /ccicall/opt/jdk1.7.0_76/bin/java /usr/bin/java
+> ll /usr/bin/java
+lrwxrwxrwx 1 root root 34 Mar  9 17:00 /usr/bin/java -> /ccicall/opt/jdk1.7.0_76/bin/java
 ```
 
 `-EOF-`
