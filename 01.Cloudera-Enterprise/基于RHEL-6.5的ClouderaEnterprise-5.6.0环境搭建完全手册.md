@@ -1068,8 +1068,9 @@ ls: cannot access /opt/scripts.zip: No such file or directory
 [...]
 ```
 
-> **注意：** 解决建议信任关系系未知问题> 1. 登陆需要建立目标节点，`rm -rf ~/.ssh; ssh-keygen -d;` 然后一直按回车就行了。
-> 2. 注意`~/.ssh`目录的权限，应是`600`,`~/.ssh`目录中的`authorized_keys`文件应是`644`。
+> **注意：** 解决建议信任关系系未知问题
+> 1. `~/.ssh`目录的权限应是`700`。
+> 2. `~/.ssh/authorized_keys`文件的权限应是`644`。
 > 3. 重新建立信任关系。
 
 #### 检查
