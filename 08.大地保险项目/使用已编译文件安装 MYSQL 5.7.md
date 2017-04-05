@@ -1,0 +1,82 @@
+# 使用已编译文件安装 MYSQL 5.7
+
+> 参考文档: https://dev.mysql.com/doc/refman/5.7/en/binary-installation.html
+
+## 作者
+
+**@author: `anxu@centrin.com.cn` || `axu.home@gmail.com`**
+
+## 目录
+
+[TOC]
+
+## 安装步骤
+
+```bash
+> groupadd mysql
+> useradd -r -g mysql -s /bin/false mysql
+> cd /usr/local
+> ln -s /ccicall/opt/mysql-5.7.16-linux-glibc2.5-x86_64/ mysql
+> cd mysql
+> mkdir mysql-files
+> chmod 750 mysql-files
+> chown -R mysql .
+> chgrp -R mysql .
+> yum -y install libaio libaio-devel
+> bin/mysqld --initialize --user=mysql
+> mkdir -p /var/run/mysqld
+> chown -R mysql:mysql /var/run/mysqld
+> bin/mysqld_safe --user=mysql &
+
+# 拷贝以后就可以使用`service`命令启停服务了，例如重启服务`service mysql.server restart`
+> cp support-files/mysql.server /etc/init.d/mysql.server
+```
+
+## 问题解决
+
+### `Cant connect to local MySQL server through socket '/tmp/mysql.sock'`
+
+```bash
+> mysql -uroot
+ERROR 2002 (HY000): Cant connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+
+# 在`/etc/my.cnf`文件中，添加`[client]`配置并指定`socket`和`[mysqld]`配置的`socket`配置一致
+> vim /etc/my.cnf
+```
+
+```bash
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+port=3306
+socket=/var/lib/mysqld/mysqld.sock
+```
+
+### `root`用户密码忘记
+
+```bash
+# 首先需要停止`mysqld`服务器
+# 启动无需密码登陆模式
+> mysqld_safe --skip-grant-tables &
+# 进入数据库
+> mysql -uroot 
+# 修改`root`用户密码
+mysql> update mysql.user set authentication_string=PASSWORD('root123') where User='root';
+mysql> ALTER USER 'root'@'localhost'IDENTIFIED BY 'root123';
+mysql> flush privileges; 
+mysql> exit;
+# 记住修改后要停止`--skip-grant-tables`的`mysqld`服务
+```
+
+`-EOF-`
+
+
