@@ -32,6 +32,55 @@
 > cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
+## 创建用户以及赋权
+
+```bash
+# 创建用户
+> mysql -uroot -proot123 -e "CREATE USER 'ccicall'@'%' IDENTIFIED BY 'work123';"
+
+# 授权
+> mysql -uroot -proot123 -e "GRANT ALL ON *.* TO 'ccicall'@'%';"
+
+# 检查
+> mysql -uccicall -pwork123 mysql -e "show tables;"
+mysql: [Warning] Using a password on the command line interface can be insecure.
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| engine_cost               |
+| event                     |
+| func                      |
+| general_log               |
+| gtid_executed             |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| server_cost               |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+```
+
 ## 问题解决
 
 ### `Cant connect to local MySQL server through socket '/tmp/mysql.sock'`
