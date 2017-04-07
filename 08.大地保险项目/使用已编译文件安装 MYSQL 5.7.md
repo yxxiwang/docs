@@ -57,6 +57,25 @@ port=3306
 socket=/var/lib/mysql/mysql.sock
 ```
 
+## 设置环境变量
+
+```bash
+# 在`/etc/profile`文件中添如下配置
+# export MYSQL_HOME=/ccicall/opt/mysql-5.7.16-linux-glibc2.5-x86_64
+# export PATH=${MYSQL_HOME}/bin:${PATH}
+> vim /etc/profile
+[...]
+export MYSQL_HOME=/ccicall/opt/mysql-5.7.16-linux-glibc2.5-x86_64
+export PATH=${MYSQL_HOME}/bin:${PATH}
+
+# 刷新配置
+> source /etc/profile
+
+# 检查
+> mysql --version
+mysql  Ver 14.14 Distrib 5.7.16, for linux-glibc2.5 (x86_64) using  EditLine wrapper
+```
+
 ## 创建用户以及赋权
 
 ```bash
@@ -145,8 +164,8 @@ socket=/var/lib/mysqld/mysqld.sock
 > mysql -uroot 
 # 修改`root`用户密码
 mysql> update mysql.user set authentication_string=PASSWORD('root123') where User='root';
-mysql> ALTER USER 'root'@'localhost'IDENTIFIED BY 'root123';
 mysql> flush privileges; 
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 mysql> exit;
 # 记住修改后要停止`--skip-grant-tables`的`mysqld`服务
 ```
