@@ -32,6 +32,31 @@
 > cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
+## 修改配置
+
+```bash
+# 修改配置（改成和下面一致）
+> vim /etc/my.cnf 
+```
+
+```bash
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+port=3306
+socket=/var/lib/mysql/mysql.sock
+```
+
 ## 创建用户以及赋权
 
 ```bash
