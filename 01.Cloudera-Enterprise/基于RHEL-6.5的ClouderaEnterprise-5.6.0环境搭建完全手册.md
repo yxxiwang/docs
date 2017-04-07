@@ -2461,9 +2461,9 @@ Starting cloudera-scm-server:                              [  OK  ]
 
 > **注意：** 在上文中的 `初始化 Activity Monitor, Hive Metastore Server, Oozie Server 数据库` 章节，我们已经在 `外部` 数据库（ `mysql` ）中为这三个服务创建好了数据库。分别对应关系是：`Hive` -> `metastore` , `Activity Monitor` -> `amon` , `Oozie Server` -> `oozie` 。在其设置页面中直接选择 `Mysql` 数据库并且填入对应数据库名称即可。
 
-![](media/14797132371800/14804098739270.jpg)
+![](media/14797132371800/14915520840098.jpg)
 
-
+> **注意：** 如果需要配置多目录，请按照上图设置。
 
 ## 测试安装结果
 
