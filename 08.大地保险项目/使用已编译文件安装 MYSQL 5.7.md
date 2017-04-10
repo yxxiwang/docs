@@ -167,8 +167,9 @@ mysql> update mysql.user set authentication_string=PASSWORD('root123') where Use
 mysql> flush privileges; 
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 mysql> exit;
-# 记住修改后要停止`--skip-grant-tables`的`mysqld`服务
 ```
+
+> **特别注意：记住修改后要停止`--skip-grant-tables`的`mysqld`服务**
 
 `-EOF-`
 
