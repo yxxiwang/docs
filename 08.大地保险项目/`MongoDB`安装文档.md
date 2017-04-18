@@ -132,6 +132,30 @@ switched to db smartv
 # 退出
 > exit
 bye
+
+# 设置环境变量（在文件最后添加）
+> vim /etc/profile
+```
+
+```bash
+export MONGODB_HOME=/usr/local/mongodb
+export PATH=${MONGODB_HOME}/bin:${PATH}
+```
+
+```bash
+# 使配置生效
+> source /etc/profile
+
+# 验证
+> mongo --version 
+MongoDB shell version: 3.2.5
+
+# 删除软件包
+> rm -rf /opt/mongodb-linux-x86_64-rhel62-3.2.5.tgz 
+> ll /opt/
+[...]
+drwxr-xr-x   3 root         root                4096 Apr 18 09:21 mongodb-linux-x86_64-rhel62-3.2.5
+[...]
 ```
 
 `-EOF-`
