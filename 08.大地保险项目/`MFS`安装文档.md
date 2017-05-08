@@ -897,6 +897,55 @@ lo        Link encap:Local Loopback
 d577273ff885c3f84dadb8578bb41399  /mnt/mfs/touch_test_file
 ```
 
+### `MFS Tools`
+
+#### 查看回收站清除时间
+
+```bash
+> df -kh 
+[...]
+mfsmaster:9421  6.8T  3.9T  3.0T  57% /mnt/mfs
+
+# 0是不会写入回收站
+> mfsgettrashtime /mnt/mfs
+/mnt/mfs: 0
+```
+
+#### 设置回收站清除时间
+
+```bash
+# -r 是递归操作
+# 0是删除的文件不会写入回收站
+> mfssettrashtime -r 0 /mnt/mfs
+/mnt/mfs:
+ inodes with trashtime changed:              0
+ inodes with trashtime not changed:     935422
+ inodes with permission denied:              0
+```
+
+#### 清空回收站内容
+
+```bash
+# 创建回收站挂载目录
+> mkdir -p /mnt/mfsmeta
+
+# 挂载回收站
+> mfsmount -m /mnt/mfsmeta/ -H mfsmaster
+mfsmaster accepted connection with parameters: read-write,restricted_ip
+
+# trash目录下内容为回收站内容
+> ll /mnt/mfsmeta/
+total 0
+dr-x------ 2 root root 0 May  8 17:42 reserved
+drwx------ 3 root root 0 May  8 17:42 trash
+
+# 清空现有回收站内容
+> rm -rf /mnt/mfsmeta/trash/*
+rm: cannot remove `/mnt/mfsmeta/trash/undel': Function not implemented
+
+# 验证可以查看:9425的`Info`页面中的`trash space`和`trash files`两项
+```
+
 `-EOF-`
 
 
