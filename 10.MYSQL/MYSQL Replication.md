@@ -574,7 +574,7 @@ Bye
 +------+
 
 #!# 登陆到从节点上操作
-#!# 会发现在从节点上也同样出现刚才创建的表
+#!# 会发现在从节点上也同样出现刚才表中创建的数据
 172.31.117.86(从节点)> mysql -uroot -proot123 -e "select * from test_mysql_replication.first_table;"
 +------+
 | id   |
