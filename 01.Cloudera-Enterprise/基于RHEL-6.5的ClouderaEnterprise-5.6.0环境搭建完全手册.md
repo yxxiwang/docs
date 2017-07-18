@@ -2821,5 +2821,34 @@ Time taken: 1.611 seconds, Fetched: 2 row(s)
 hive> exit;
 ```
 
+## 问题解答（`Trouble Shooting`）
+
+> 基本原则是遇到问题：
+> 第一，查看执行步骤是否有遗漏
+> 第二，查看执行命令是否正确
+
+### `NameNode NFS Gateway` 启动失败
+
+#### 问题现象
+
+```bash
+socket.error: [Errno 111] Connection refused
++ '[' 1 -ne 0 ']'
++ echo 'Cannot connect to port 111.'
++ return 1
++ '[' 1 -eq 1 ']'
++ echo 'No portmap or rpcbind service is running on this host. Please start portmap or rpcbind service before attempting to start the NFS Gateway role on this host.'
++ exit 1
+```
+
+#### 解决方法
+
+```bash
+# 查看`rpcbind`服务是否启动
+> service rpcbind start
+[...]
+> chkconfig rpcbind on
+```
+
 `-EOF-`
 
