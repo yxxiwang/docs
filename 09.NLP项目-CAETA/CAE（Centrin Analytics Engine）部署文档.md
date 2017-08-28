@@ -33,7 +33,7 @@
 ```bash
 # 切换用户
 > su -  
- 
+
 # 安装依赖包
 > yum -y install gcc gcc-c++ zlib-devel bzip2-devel sqlite-devel
 [...]
@@ -49,7 +49,7 @@
 
 # 切换目录
 > cd ~
-> ll packages.zip 
+> ll packages.zip
 -rw-r--r--. 1 root root 302967424 Mar  1 17:45 packages.zip
 
 # 解压
@@ -103,7 +103,7 @@ drwxr-xr-x.  5 1000 1000   4096 Dec 18 04:05 RISCOS
 drwxr-xr-x. 23 1000 1000   4096 Dec 18 04:05 Tools
 
 # 配置
-> ./configure --prefix=/usr/local --enable-unicode=ucs4 --with-zlib-dir=/usr/local/lib --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+> ./configure --prefix=/usr/local  --with-zlib-dir=/usr/local/lib --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 [...]
 
 # 编译
@@ -157,7 +157,7 @@ index 7ccee31..eb07e24 100755
  import sys
  try:
      import yum
-     
+
 # 检查
 #!# 不报`No module named yum`错误
 > yum list | more
@@ -168,7 +168,7 @@ index 7ccee31..eb07e24 100755
 
 ```bash
 # 切换用户
-> su - 
+> su -
 
 # 切换目录
 > cd /root/packages
@@ -229,7 +229,7 @@ index 1b82ae6..5147aba 100644
 --- a/etc/profile.raw
 +++ b/etc/profile
 @@ -76,3 +76,8 @@ done
- 
+
  unset i
  unset -f pathmunge
 +
@@ -252,7 +252,7 @@ OpenJDK 64-Bit Server VM (build 24.45-b08, mixed mode)
 
 ```bash
 # 切换用户
-> su - 
+> su -
 
 # 切换目录
 > cd /root/packages
@@ -281,7 +281,7 @@ pip 9.0.1 from /usr/local/lib/python2.7/site-packages (python 2.7)
 /root/packages
 
 # 执行安装命令
-> pip install --no-index --find-links=/root/packages/requirements -r requirements.list 
+> pip install --no-index --find-links=/root/packages/requirements -r requirements.list
 Collecting boto==2.45.0 (from -r requirements.list (line 1))
 Collecting bz2file==0.98 (from -r requirements.list (line 2))
 Collecting Django==1.9.8 (from -r requirements.list (line 3))
@@ -317,11 +317,11 @@ Successfully installed Django-1.9.8 M2Crypto-0.25.1 Markdown-2.6.6 MySQL-python-
 # 安装Jpype
 > tar -zxvf pyparsing-2.1.10.tar.gz
 > cd pyparsing-2.1.10
-> python setup.py install 
+> python setup.py install
 [...]
 
-> cd /root/packages 
-> unzip JPype1-0.6.2.tar.gz 
+> cd /root/packages
+> unzip JPype1-0.6.2.tar.gz
 > cd JPype1-0.6.2
 > python setup.py install
 [...]
@@ -377,7 +377,7 @@ wheel (0.30.0a0)
 
 ##### 获取最新版本代码
 
-> 因为要使用 `svn` , 若没有相关组件请自行安装。 
+> 因为要使用 `svn` , 若没有相关组件请自行安装。
 
 ```bash
 > svn export http://172.31.117.4/svn/cae/trunk/ cae
@@ -507,5 +507,3 @@ Destroying test database for alias 'default'...
 ```
 
 `-EOF-`
-
-
