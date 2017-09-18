@@ -2612,7 +2612,7 @@ Stopping cloudera-scm-agent:                               [  OK  ]
 > for u in cloudera-scm flume hadoop hdfs hbase hive httpfs hue impala llama mapred oozie solr spark sqoop sqoop2 yarn zookeeper; do sudo kill $(ps -u $u -o pid=); done
 
 # 删除`Cloudera Manager`数据
-# 所哟服务器执行
+# 所有服务器执行
 > sudo umount cm_processes 
 > sudo rm -Rf /usr/share/cmf /var/lib/cloudera* /var/cache/yum/cloudera* /var/log/cloudera* /var/run/cloudera*
 > sudo rm /tmp/.scm_prepare_node.lock
