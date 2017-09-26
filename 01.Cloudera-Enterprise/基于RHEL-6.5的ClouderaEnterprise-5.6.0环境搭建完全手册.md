@@ -37,7 +37,7 @@
 ### 资源下载
 
 - CDH相关、通过parcels方式安装：http://archive.cloudera.com/cdh5/parcels/5.6.0/
-- Cloudera Manager相关，包含server、agent、oracle-jdk等：https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.6.0/ 
+- Cloudera Manager相关，包含server、agent、oracle-jdk等：https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.6.0/
 
 <!-- more -->
 
@@ -74,13 +74,13 @@
 
 ```bash
 # 登陆后，查看 `repo` 服务器 `ip` 地址
-> /sbin/ifconfig 
+> /sbin/ifconfig
 [...]
 
 eth1      Link encap:Ethernet  HWaddr A0:36:9F:8C:2B:CF  
           inet addr:10.0.3.49  Bcast:10.0.3.255  Mask:255.255.255.0
           inet6 addr: fe80::a236:9fff:fe8c:2bcf/64 Scope:Link
-          
+
 [...]
 
 # 登陆后，查看 `repo` 服务器操作用户
@@ -116,21 +116,21 @@ drwxr-xr-x. 6 root root 4096 Nov 23 18:25 /Archive/
 > **注意：** 可以有多种方式获取系统光盘的 `ISO` 文件，所以如何获得 `ISO` 文件这里不做具体描述。
 > - 可以将系统光盘插入服务器光驱并在服务器文件系统中挂载光驱后，到挂载目录中拷贝 `ISO` 文件。（ 参考教程：http://jingyan.baidu.com/article/e52e3615a9c19440c60c5121.html ）
 > - 可以通过官方网站下载对应版本的操作系统 `ISO` 文件。
-> 
+>
 > 推荐使用通过系统光盘获取 `ISO` 文件方式。
-> 
+>
 > **默认已经将 `ISO` 文件，下载到 `/root` 目录中。**
 
 ```bash
 # 查看已经获取 `ISO` 文件路径
-> ll /root/rhel-server-6.5-x86_64-dvd.iso 
+> ll /root/rhel-server-6.5-x86_64-dvd.iso
 -rwxr-xr-x 1 root root 3853516800 Nov 25 09:38 /root/rhel-server-6.5-x86_64-dvd.iso
 ```
 
 - 2. 创建目录
 
 > **注意：** 需要分别创建 `存放` 和 `挂载` `ISO` 文件的目录。
- 
+
 - 2.1. 创建存放 `ISO` 文件目录
 
 ```bash
@@ -171,7 +171,7 @@ dr-xr-xr-x 12 root root 8192 Nov 12  2013 /Archive/RedHat-Enterprise-Linux/6.5/
 
 > **注意：** 将挂载信息写入 `/etc/fstab` 文件中，以便可以实现服务器重启后自动挂载。
 
-- 4.1. 备份挂载配置文件 `/etc/fstab` 
+- 4.1. 备份挂载配置文件 `/etc/fstab`
 
 ```bash
 > cp /etc/fstab /etc/fstab.raw
@@ -301,7 +301,7 @@ dr-xr-xr-x 3 root root   2048 Nov 12  2013 Server
 > cd /Archive/RedHat-Enterprise-Linux/
 
 # 创建 `rhel-6.5-media.repo` 文件，内容如下:
-> cat rhel-6.5-media.repo 
+> cat rhel-6.5-media.repo
 ```
 
 ```bash
@@ -323,7 +323,7 @@ drwxr-xr-x  2 root root 4096 Nov 23 16:02 DVD
 -rwxr-xr-x  1 root root  227 Nov 23 16:14 rhel-6.5-media.repo
 ```
 
-##### `Cloudera Enterprise - CDH - Parcels` 
+##### `Cloudera Enterprise - CDH - Parcels`
 
 - 1. 创建目录
 
@@ -374,7 +374,7 @@ total 1423276
 ```bash
 # 进入目录
 > cd /Archive/
- 
+
 # 执行下载命令
 # 大约需要下载 `700MB` 左右的数据，若时间过久可以通过后台执行方式下载。
 # 后台下载命令（ nohup wget -c -r -np -k -L -p https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.6.0/ & ）
@@ -386,7 +386,7 @@ total 1423276
 
 # 删除多余文件
 > rm -rf `find /Archive/archive.cloudera.com/ -name "index.html*"`
- 
+
 # 查看下载主要文件
 > ll /Archive/archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.6.0/RPMS/x86_64/
 total 698960
@@ -427,7 +427,7 @@ drwxr-xr-x 4 root root 4096 Nov 25 14:58 5.6.0
 ```bash
 # 执行拷贝命令
 > cp -r /Archive/archive.cloudera.com/cm5 /Archive/Cloudera-Enterprise/
- 
+
 # 查看拷贝结果
 > ll /Archive/Cloudera-Enterprise/
 total 8
@@ -468,7 +468,7 @@ gpgcheck = 1
 - 6. 和原始 `repo` 文件对比
 
 ```bash
-> git diff /Archive/archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo /Archive/Cloudera-Enterprise/cm5/redhat/6/x86_64/cm/cloudera-manager.repo 
+> git diff /Archive/archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo /Archive/Cloudera-Enterprise/cm5/redhat/6/x86_64/cm/cloudera-manager.repo
 
 diff --git a/Archive/archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo b/Archive/Cloudera-Enterprise/cm5/redhat/6/x86_64/cm/c
 old mode 100644
@@ -504,7 +504,7 @@ ls: cannot access /Archive/archive.cloudera.com/: No such file or directory
 > - `pushssh.sh`: 创建信任关系
 > - `pssh.sh`: 多服务器批量执行命令
 > - `pscp.sh`: 多服务器批量拷贝文件
-> 
+>
 > **若没有这些脚本可以去互联网上查找类似脚本**
 
 ```bash
@@ -517,7 +517,7 @@ drwxr-xr-x 2 root root 4096 Nov 24 17:55 /Archive/Scripts/
 [...]
 
 # 获取后查看结果
-> ll /Archive/Scripts/scripts.zip 
+> ll /Archive/Scripts/scripts.zip
 -rwxr-xr-x 1 root root 71627 Nov 24 17:55 /Archive/Scripts/scripts.zip
 ```
 
@@ -540,9 +540,9 @@ drwxr-xr-x 2 root root 4096 Nov 25 09:20 /Archive/Resources/
 - 2. 下载 `mysql-jdbc-driver` 文件
 
 > **注意：** `mysql-jdbc-driver` 是 `Cloudera Manager`, `Hive`, `oozie`, `...` 等连接 `mysql` 数据库时使用。
-> 
+>
 > **官网说明：** http://www.cloudera.com/documentation/enterprise/5-6-x/topics/cm_ig_mysql.html#cmig_topic_5_5_3
- 
+
 ```bash
 # 进入目录
 > cd /Archive/Resources/
@@ -552,7 +552,7 @@ drwxr-xr-x 2 root root 4096 Nov 25 09:20 /Archive/Resources/
 [...]
 
 # 查看下载文件
-> ll /Archive/Resources/mysql-connector-java-5.1.40.tar.gz 
+> ll /Archive/Resources/mysql-connector-java-5.1.40.tar.gz
 -rwxr-xr-x 1 root root 3911557 Sep 25 00:35 /Archive/Resources/mysql-connector-java-5.1.40.tar.gz
 ```
 
@@ -563,10 +563,10 @@ drwxr-xr-x 2 root root 4096 Nov 25 09:20 /Archive/Resources/
 > cd /Archive/Resources/
 
 # 创建 `archive_centrin.conf` 文件，内容如下：
-> cat archive_centrin.conf 
+> cat archive_centrin.conf
 ```
 
-```bash 
+```bash
 # NameVirtualHost *:80
 # do not allow override of this value for the UI's Vhost as it should always be off when generating non-html content such as dynamic images
 <VirtualHost *:80>
@@ -575,7 +575,7 @@ drwxr-xr-x 2 root root 4096 Nov 25 09:20 /Archive/Resources/
         ErrorLog /var/log/httpd/centrin_archive_error.log
 
         <Directory "/Archive">
-                Options +Indexes 
+                Options +Indexes
                 AllowOverride All
                 Order deny,allow
                 Allow from All
@@ -583,7 +583,7 @@ drwxr-xr-x 2 root root 4096 Nov 25 09:20 /Archive/Resources/
 </VirtualHost>
 ```
 
-- 4. 查看 `Resources` 目录全部内容 
+- 4. 查看 `Resources` 目录全部内容
 
 ```bash
 > ll /Archive/Resources/
@@ -595,7 +595,7 @@ total 3824
 #### 通过 `http` 方式搭建软件服务器（ `Repository Server` ）
 
 > **注意：** 本文中使用 `Web Server` 为 `apache httpd`，若想使用其他 `Web Server` 请自行解决。
- 
+
 - 1. 查看 `httpd` 服务状态
 
 ```bash
@@ -633,7 +633,7 @@ Stopping httpd:                                            [  OK  ]
 
 # 删除文件
 > mv welcome.conf welcome.conf.deleted
- 
+
 # 检查
 > ll
 total 28
@@ -641,7 +641,7 @@ total 28
 -rw-r--r--. 1 root root  118 May 20  2009 mod_dnssd.conf
 -rw-r--r--. 1 root root  392 Aug  2  2013 README
 -rw-r--r--  1 root root 9473 Aug  2  2013 ssl.conf
--rw-r--r--. 1 root root  299 Aug  2  2013 welcome.conf.deleted 
+-rw-r--r--. 1 root root  299 Aug  2  2013 welcome.conf.deleted
 ```
 
 - 4.2. `"删除"` `noindex.html` 文件
@@ -686,15 +686,15 @@ httpd (pid  19397) is running...
 Table: filter
 Chain INPUT (policy ACCEPT)
 num  target     prot opt source               destination         
-1    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED 
+1    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED
 2    ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0           
 3    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           
-4    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22 
-5    REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited 
+4    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22
+5    REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
 
 Chain FORWARD (policy ACCEPT)
 num  target     prot opt source               destination         
-1    REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited 
+1    REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
 
 Chain OUTPUT (policy ACCEPT)
 num  target     prot opt source               destination         
@@ -720,7 +720,7 @@ iptables: Firewall is not running.
 - 8. 登陆页面查看启动情况
 
 > **注意：** 若有 `403` 等访问权限错误，可能还需要关闭 `SELinux` 。具体关闭 `SELinux` 方式可以详见下文中的 `关闭SELinux` 章节。
-> 
+>
 > 一定要保证浏览器访问 `http://10.0.3.49/` 地址的时候和下图中显示的一样。
 
 通过浏览器访问地址：http://10.0.3.49/
@@ -754,7 +754,7 @@ PING archive.centrin.com.cn (10.0.3.49) 56(84) bytes of data.
 - 1. 删除原有 `repo` 文件
 
 > **注意：** 若不确定 `/etc/yum.repos.d/` 目录下是否所有的文件均可以删除，则需要提前备份该目录下文件，以便删除后找不回来。
-> 
+>
 > **为了下文中 `同步软件服务器（ Repository Server ）repo 文件` 章节方便，需要 `依次登陆集群所有的服务器` 执行 "删除原有 `repo` 文件" 操作**
 
 ```bash
@@ -774,9 +774,9 @@ total 0
 # 进入目录
 > cd /etc/yum.repos.d/
 
-# 下载 `rhel - repo` 文件 
+# 下载 `rhel - repo` 文件
 > wget http://10.0.3.49/RedHat-Enterprise-Linux/rhel-6.5-media.repo ./
- 
+
 # 下载 `cm5 - repo` 文件
 > wget http://10.0.3.49/Cloudera-Enterprise/cm5.repo ./
 
@@ -784,7 +784,7 @@ total 0
 > ll
 total 8
 -rw-r--r-- 1 root root 336 Nov 23 17:30 cm5.repo
--rw-r--r-- 1 root root 227 Nov 23 16:14 rhel-6.5-media.repo 
+-rw-r--r-- 1 root root 227 Nov 23 16:14 rhel-6.5-media.repo
 ```
 
 - 3. 清除缓存
@@ -888,7 +888,7 @@ repolist: 3,697
 #### 下载 `repo` 文件
 
 > **注意：** 因为在 `验证软件服务器（ Repository Server ）` 章节已经将 `repo` 文件下载到 `/etc/yum.repo.d/` 目录中；所以在这里不再赘述。
-> 
+>
 > 可根据下面命令验证 `repo` 文件是否已经下载完成。若和执行结果不一致请查看 `验证软件服务器（ Repository Server ）` 章节。
 
 ```bash
@@ -933,7 +933,7 @@ SELINUX=disabled
 # SELINUXTYPE= can take one of these two values:
 #     targeted - Targeted processes are protected,
 #     mls - Multi Level Security protection.
-SELINUXTYPE=targeted 
+SELINUXTYPE=targeted
 ```
 
 #### 和原始文件对比修改内容
@@ -982,13 +982,13 @@ SELinux status:                 disabled
 ```bash
 # 进入目录
 > cd /opt/
- 
+
 # 下载使用脚本
 > wget http://archive.centrin.com.cn/Scripts/scripts.zip ./
 [...]
 
 # 检查
-> ll 
+> ll
 -rw-r--r-- 1 root root 71627 Nov 24 17:55 /opt/scripts.zip
 ```
 
@@ -1021,8 +1021,8 @@ SELinux status:                 disabled
 > rm -rf /opt/scripts/allhosts
 
 # 将如下内容写入 `/opt/scripts/allhosts` 文件
-> cat /opt/scripts/allhosts 
-``` 
+> cat /opt/scripts/allhosts
+```
 
 ```bash
 server349
@@ -1039,7 +1039,7 @@ server354
 ```bash
 # 执行删除
 > rm -rf /opt/scripts.zip
- 
+
 # 检查
 > ll /opt/scripts.zip
 ls: cannot access /opt/scripts.zip: No such file or directory
@@ -1321,9 +1321,9 @@ Command to Exec: scp -r /etc/yum.repos.d/ root@server354:/etc/
 =========================================================
 cm5.repo                                                                        100%  336     0.3KB/s   00:00    
 rhel-6.5-media.repo                                                             100%  227     0.2KB/s   00:00    
-====================End================================== 
+====================End==================================
 ```
- 
+
 #### 通过 `internal tools` - `/opt/scripts/pssh.sh` 检查同步结果
 
 ```bash
@@ -1398,7 +1398,7 @@ total 8
 > - 2. 设置 `iptables` 防火墙重启后不自动启动
 > - 3. 关闭 `ip6tables` 防火墙
 > - 4. 设置 `ip6tables` 防火墙重启后不自动启动
- 
+
 ```bash
 > /opt/scripts/pssh.sh /opt/scripts/allhosts "service iptables stop;chkconfig iptables off;service ip6tables stop;chkconfig ip6tables off;"
 
@@ -1475,7 +1475,7 @@ ip6tables: Unloading modules: [  OK  ]
 ```
 
 #### 通过 `internal tools` - `/opt/scripts/pssh.sh` 检查防火墙关闭情况
- 
+
 ```bash
 > /opt/scripts/pssh.sh /opt/scripts/allhosts "service iptables status;service ip6tables status;"
 
@@ -1536,13 +1536,13 @@ ip6tables: Firewall is not running.
 
 ### 搭建时间服务器（ `NTP Server` ）
 
-#### 安装 `ntp` 
+#### 安装 `ntp`
 
 > **注意：** 一般服务器在安装操作系统的同时已经将 `ntp` 安装。
 
 ```bash
 > /opt/scripts/pssh.sh /opt/scripts/allhosts "yum -y install ntp"
- 
+
 CMD to Exec: yum -y install ntp
 
 
@@ -1617,7 +1617,7 @@ Nothing to do
 
 ```bash
 > /opt/scripts/pssh.sh /opt/scripts/allhosts "chkconfig ntpd on"
- 
+
 CMD to Exec: chkconfig ntpd on
 
 
@@ -1746,7 +1746,7 @@ index e18f59e..8ad2bd7 100644
 --- a/etc/ntp.conf.raw
 +++ b/etc/ntp.conf
 @@ -19,10 +19,12 @@ restrict -6 ::1
- 
+
  # Use public servers from the pool.ntp.org project.
  # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 -server 0.rhel.pool.ntp.org iburst
@@ -1759,7 +1759,7 @@ index e18f59e..8ad2bd7 100644
 +#server 3.rhel.pool.ntp.org iburst
 +server 127.127.1.0
 +fudge 127.127.1.0 stratum 8 
- 
+
  #broadcast 192.168.1.255 autokey       # broadcast server
  #broadcastclient                       # broadcast client
 ```
@@ -1790,13 +1790,13 @@ server ntp.centrin.com.cn
 
 ```bash
 > git diff /etc/ntp.conf.raw /etc/ntp.conf
- 
+
 diff --git a/etc/ntp.conf.raw b/etc/ntp.conf
 index e18f59e..185e5f9 100644
 --- a/etc/ntp.conf.raw
 +++ b/etc/ntp.conf
 @@ -19,10 +19,11 @@ restrict -6 ::1
- 
+
  # Use public servers from the pool.ntp.org project.
  # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 -server 0.rhel.pool.ntp.org iburst
@@ -1808,7 +1808,7 @@ index e18f59e..185e5f9 100644
 +#server 2.rhel.pool.ntp.org iburst
 +#server 3.rhel.pool.ntp.org iburst
 +server ntp.centrin.com.cn
- 
+
  #broadcast 192.168.1.255 autokey       # broadcast server
  #broadcastclient                       # broadcast client
 ```
@@ -1824,7 +1824,7 @@ Starting ntpd:                                             [  OK  ]
 #### 校验 `主` 节点 `ntp` 服务状态
 
 > **注意：** 如果提示 `No association ID's returned` 错误，将之前需要修改的内容手动打入文件中，而不是使用 `复制` / `粘贴`。然后重启等一会再查看结果。
-> 
+>
 > **注意：** 验证 `remote` 栏中是 `LOCAL(0)` ，表示使用本地节点。
 
 ```bash
@@ -1835,7 +1835,7 @@ Starting ntpd:                                             [  OK  ]
 ```
 
 > **注意：**  也可以使用 `ntpdate` 验证 `ntp` 服务器 `主` 节点是否搭建成功。若提示没有 `ntpdate` 命令，可以通过 `yum -y install ntpdate` 安装。
- 
+
 ```bash
 > ntpdate -d ntp.centrin.com.cn
 
@@ -1857,8 +1857,8 @@ transmitted 4, in filter 4
 reference time:    dbe75b7c.1b31ae33  Tue, Nov 29 2016  9:42:20.106
 originate timestamp: dbe75bb6.ad869791  Tue, Nov 29 2016  9:43:18.677
 transmit timestamp:  dbe75bb6.ad85a3cc  Tue, Nov 29 2016  9:43:18.677
-filter delay:  0.02568  0.02563  0.02562  0.02562 
-         0.00000  0.00000  0.00000  0.00000 
+filter delay:  0.02568  0.02563  0.02562  0.02562
+         0.00000  0.00000  0.00000  0.00000
 filter offset: -0.00001 -0.00000 -0.00000 -0.00000
          0.000000 0.000000 0.000000 0.000000
 delay 0.02562, dispersion 0.00000
@@ -1887,7 +1887,7 @@ Starting ntpd:                                             [  OK  ]
 ```
 
 > **注意：**  也可以使用 `ntpdate` 验证 `ntp` 服务器 `主` 节点是否搭建成功。若提示没有 `ntpdate` 命令，可以通过 `yum -y install ntpdate` 安装。
- 
+
 ```bash
 > ntpdate -d ntp.centrin.com.cn
 
@@ -1909,8 +1909,8 @@ transmitted 4, in filter 4
 reference time:    dbe75cbc.204da8b9  Tue, Nov 29 2016  9:47:40.126
 originate timestamp: dbe75cbe.5ac44cee  Tue, Nov 29 2016  9:47:42.354
 transmit timestamp:  dbe75cbe.5ad75d81  Tue, Nov 29 2016  9:47:42.354
-filter delay:  0.02573  0.02565  0.02565  0.02565 
-         0.00000  0.00000  0.00000  0.00000 
+filter delay:  0.02573  0.02565  0.02565  0.02565
+         0.00000  0.00000  0.00000  0.00000
 filter offset: -0.00034 -0.00032 -0.00032 -0.00032
          0.000000 0.000000 0.000000 0.000000
 delay 0.02565, dispersion 0.00000
@@ -2056,7 +2056,7 @@ sql_mode=STRICT_ALL_TABLES
 #### 对比 `原始文件` 和 `修改后` 的配置
 
 ```bash
-# 对比修改后配置 
+# 对比修改后配置
 > git diff /etc/my.cnf.raw /etc/my.cnf
 
 diff --git a/etc/my.cnf.raw b/etc/my.cnf
@@ -2108,13 +2108,13 @@ index fae0fa2..18e59c4 100644
 +innodb_thread_concurrency = 8
 +innodb_flush_method = O_DIRECT
 +innodb_log_file_size = 512M
- 
+
  [mysqld_safe]
  log-error=/var/log/mysqld.log
  pid-file=/var/run/mysqld/mysqld.pid
 +
 +sql_mode=STRICT_ALL_TABLES
-(END) 
+(END)
 ```
 
 #### 设置 `mysql` 自动启动
@@ -2157,7 +2157,7 @@ Starting mysqld:                                           [  OK  ]
 > - 6. Disallow root login remotely? [Y/n] `n`
 > - 7. Remove test database and access to it? [Y/n] `Y`
 > - 8. Reload privilege tables now? [Y/n] `Y`
-> 
+>
 > **注意：** 这里输入的密码需要记住，之后会用到。
 
 ```bash
@@ -2165,14 +2165,14 @@ Starting mysqld:                                           [  OK  ]
 
 [...]
 
-Enter current password for root (enter for none): 
+Enter current password for root (enter for none):
 OK, successfully used password, moving on...
 
 [...]
 
 Set root password? [Y/n] Y
-New password: 
-Re-enter new password: 
+New password:
+Re-enter new password:
 Password updated successfully!
 Reloading privilege tables..
  ... Success!
@@ -2211,13 +2211,13 @@ All done!
 # 下载驱动
 > cd /opt/
 > wget http://archive.centrin.com.cn/Resources/mysql-connector-java-5.1.40.tar.gz ./
-> ll 
+> ll
 [...]
 -rw-r--r--  1 root root 3911557 Sep 25 00:35 mysql-connector-java-5.1.40.tar.gz
-[...] 
+[...]
 
 # 解压驱动
-> tar -zxvf mysql-connector-java-5.1.40.tar.gz 
+> tar -zxvf mysql-connector-java-5.1.40.tar.gz
 [...]
 > ll mysql-connector-java-5.1.40
 -rw-r--r-- 1 root root  90699 Sep 25 02:35 build.xml
@@ -2324,7 +2324,7 @@ All done, your SCM database is configured correctly!
 ```bash
 > service cloudera-scm-server restart
 cloudera-scm-server is already stopped
-Starting cloudera-scm-server:                              [  OK  ] 
+Starting cloudera-scm-server:                              [  OK  ]
 ```
 
 ## 通过 `Cloudera Manager` - ` WEB UI` 安装 `CDH`
@@ -2402,7 +2402,7 @@ Starting cloudera-scm-server:                              [  OK  ]
 ![](media/14797132371800/14804070758467.jpg)
 
 > **注意：** 由于在此页面会停留很长时间，所以简要说明一下每个步骤工作流程。
-> 
+>
 > - 1. 已下载：将 `parcel` 包从之前配置的 `repo` 地址下载到启动 `Cloudera-Manager Server` 服务器的本地 `/opt/cloudera/parcel-repo` 目录中。
 > - 2. 已分配：将 `Cloudera-Manager Server` 服务器的本地 `/opt/cloudera/parcel-repo` 目录中的 `parcel` 包，分配传输到每个节点的 `/opt/cloudera/parcel-cache`  目录中。
 > - 3. 已解压：将每个节点 `/opt/cloudera/parcel-cache` 目录中的 `parcel` 包解压到 `/opt/cloudera/parcels` 目录中。
@@ -2480,7 +2480,7 @@ Starting cloudera-scm-server:                              [  OK  ]
 ### 执行测试命令 `计算 PI`
 
 ```bash
-# 执行测试命令，计算 `pi` 
+# 执行测试命令，计算 `pi`
 > sudo -u hdfs hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar pi 10 100
 
 Number of Maps  = 10
@@ -2520,7 +2520,7 @@ Starting Job
                 HDFS: Number of read operations=43
                 HDFS: Number of large read operations=0
                 HDFS: Number of write operations=3
-        Job Counters 
+        Job Counters
                 Launched map tasks=10
                 Launched reduce tasks=1
                 Data-local map tasks=10
@@ -2560,9 +2560,9 @@ Starting Job
                 WRONG_LENGTH=0
                 WRONG_MAP=0
                 WRONG_REDUCE=0
-        File Input Format Counters 
+        File Input Format Counters
                 Bytes Read=1180
-        File Output Format Counters 
+        File Output Format Counters
                 Bytes Written=97
 Job Finished in 17.364 seconds
 Estimated value of Pi is 3.14800000000000000000
@@ -2609,11 +2609,12 @@ Stopping cloudera-scm-agent:                               [  OK  ]
 [...]
 
 # 所有服务器执行，杀进程
+# **注意：** 在 Cloudera Manager 4.8 版本中，还需要杀一个端口号为 9001 的 supervisord 进程，可以使用 `netstat -apn | grep 9001` 获取进程号
 > for u in cloudera-scm flume hadoop hdfs hbase hive httpfs hue impala llama mapred oozie solr spark sqoop sqoop2 yarn zookeeper; do sudo kill $(ps -u $u -o pid=); done
 
 # 删除`Cloudera Manager`数据
 # 所有服务器执行
-> sudo umount cm_processes 
+> sudo umount cm_processes
 > sudo rm -Rf /usr/share/cmf /var/lib/cloudera* /var/cache/yum/cloudera* /var/log/cloudera* /var/run/cloudera*
 > sudo rm /tmp/.scm_prepare_node.lock
 > sudo rm -Rf /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper
@@ -2686,7 +2687,7 @@ Bye
 
 > **特别注意：红框中问题解决方法详见上文安装步骤。**
 > 解决问题后可以点击页面最上端的`重新运行`按钮重新检查。
-> 
+>
 > `检查 /etc/hosts 时发现以下错误...` 和 `检查主机名称时发现以下失败结果。仅显示前 1000 个失败结果...` 不需要解决
 
 ![](media/14797132371800/14930270147294.jpg)
@@ -2732,7 +2733,7 @@ Bye
 
 ![](media/14797132371800/14930273610639.jpg)
 
-#### `Hive` 
+#### `Hive`
 
 ![](media/14797132371800/14930273919895.jpg)
 
@@ -2851,4 +2852,3 @@ socket.error: [Errno 111] Connection refused
 ```
 
 `-EOF-`
-
