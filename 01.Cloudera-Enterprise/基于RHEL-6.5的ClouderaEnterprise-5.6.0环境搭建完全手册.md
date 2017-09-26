@@ -2857,13 +2857,13 @@ socket.error: [Errno 111] Connection refused
 
 #### 问题现象
 
-`Cloudera Manager` 所有页面图表显示不出来。
+> `Cloudera Manager` 所有页面图表显示不出来。
 
 (补充显示不出来页面图片)
 
 (补充页面请求 403 图片)
 
-查看 `cloudera-scm-server.log` 报如下警告（`WARN`）
+> 查看 `/var/log/cloudera-scm-server/cloudera-scm-server.log` 报如下警告（`WARN`）
 
 ```bash
 #（补充警告信息）
@@ -2871,7 +2871,9 @@ socket.error: [Errno 111] Connection refused
 
 #### 问题原因
 
-> 使用 `Nginx` 代理后有 `CSRF` 隐患，导致访问被拒绝。
+> 配置 `Nginx` 反向代理后有 `CSRF` 隐患，导致访问被拒绝。
+>
+> `CRSF(https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0)`
 
 #### 解决方法
 
