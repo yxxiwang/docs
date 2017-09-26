@@ -2589,11 +2589,11 @@ Stopping cloudera-scm-server:                              [  OK  ]
 > sudo service cloudera-scm-server-db stop
 cloudera-scm-server-db: unrecognized service
 
-> sudo yum remove cloudera-manager-server
+> sudo yum -y remove cloudera-manager-server
 [...]
 
 # 可能会没有这个服务
-> sudo yum remove cloudera-manager-server-db-2
+> sudo yum -y remove cloudera-manager-server-db-2
 [...]
 
 # 所有服务器执行
