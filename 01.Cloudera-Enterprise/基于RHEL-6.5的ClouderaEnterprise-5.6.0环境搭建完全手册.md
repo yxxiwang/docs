@@ -2601,23 +2601,25 @@ cloudera-scm-server-db: unrecognized service
 Stopping cloudera-scm-agent:                               [  OK  ]
 
 # 所有服务器执行
-> sudo yum remove 'cloudera-manager-*'
+> sudo yum -y remove 'cloudera-manager-*'
 [...]
 
 # 所有服务器执行
-> sudo yum remove 'cloudera-manager-*' avro-tools crunch flume-ng hadoop-hdfs-fuse hadoop-hdfs-nfs3 hadoop-httpfs hadoop-kms hbase-solr hive-hbase hive-webhcat hue-beeswax hue-hbase hue-impala hue-pig hue-plugins hue-rdbms hue-search hue-spark hue-sqoop hue-zookeeper impala impala-shell kite llama mahout oozie pig pig-udf-datafu search sentry solr-mapreduce spark-core spark-master spark-worker spark-history-server spark-python sqoop sqoop2 whirr hue-common oozie-client solr solr-doc sqoop2-client zookeeper
+> sudo yum -y remove 'cloudera-manager-*' avro-tools crunch flume-ng hadoop-hdfs-fuse hadoop-hdfs-nfs3 hadoop-httpfs hadoop-kms hbase-solr hive-hbase hive-webhcat hue-beeswax hue-hbase hue-impala hue-pig hue-plugins hue-rdbms hue-search hue-spark hue-sqoop hue-zookeeper impala impala-shell kite llama mahout oozie pig pig-udf-datafu search sentry solr-mapreduce spark-core spark-master spark-worker spark-history-server spark-python sqoop sqoop2 whirr hue-common oozie-client solr solr-doc sqoop2-client zookeeper
 [...]
 
 # 所有服务器执行，杀进程
-# **注意：** 在 Cloudera Manager 4.8 版本中，还需要杀一个端口号为 9001 的 supervisord 进程，可以使用 `netstat -apn | grep 9001` 获取进程号
 > for u in cloudera-scm flume hadoop hdfs hbase hive httpfs hue impala llama mapred oozie solr spark sqoop sqoop2 yarn zookeeper; do sudo kill $(ps -u $u -o pid=); done
+
+# **注意：** 在 Cloudera Manager 4.8 版本中，还需要杀一个端口号为 9001 的 supervisord 进程，可以使用 `netstat -apn | grep 9001` 获取进程号
+> kill -9 `netstat -apn | grep 9001 | grep python | awk -F" " '{print $7}' | awk -F"/" '{print $1}'`
 
 # 删除`Cloudera Manager`数据
 # 所有服务器执行
 > sudo umount cm_processes
-> sudo rm -Rf /usr/share/cmf /var/lib/cloudera* /var/cache/yum/cloudera* /var/log/cloudera* /var/run/cloudera*
+> sudo rm -rf /usr/share/cmf /var/lib/cloudera* /var/cache/yum/cloudera* /var/log/cloudera* /var/run/cloudera*
 > sudo rm /tmp/.scm_prepare_node.lock
-> sudo rm -Rf /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper
+> sudo rm -rf /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper
 
 # 删除外部数据库
 > mysql -uroot -proot123
