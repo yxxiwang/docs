@@ -2853,4 +2853,30 @@ socket.error: [Errno 111] Connection refused
 > chkconfig rpcbind on
 ```
 
+### 配置 Nginx 反向代理后 Cloudera Manager 页面图表显示不出来
+
+#### 问题现象
+
+`Cloudera Manager` 所有页面图表显示不出来。
+
+(补充显示不出来页面图片)
+
+(补充页面请求 403 图片)
+
+查看 `cloudera-scm-server.log` 报如下警告（`WARN`）
+
+```bash
+#（补充警告信息）
+```
+
+#### 问题原因
+
+> 使用 `Nginx` 代理后有 `CSRF` 隐患，导致访问被拒绝。
+
+#### 解决方法
+
+```bash
+#（补充解决方法）
+```
+
 `-EOF-`
