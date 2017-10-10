@@ -271,12 +271,15 @@ total 24
 #!# 为了不和 httpd 2.2 的 80 端口冲突，所以将文件服务器端口修改为 8001
 # 第1行添加 Listen *:8001
 # 第4行修改为 <VirtualHost *:8001>
+# 注释第12行
+# 注释第13行
+# 第14行添加 Require all granted
 > vim file_server.conf
 
 # 对比原文件
 > git diff file_server.conf.raw file_server.conf
 diff --git a/file_server.conf.raw b/file_server.conf
-index 214fb22..cd1092a 100644
+index 214fb22..7526e1d 100644
 --- a/file_server.conf.raw
 +++ b/file_server.conf
 @@ -1,7 +1,7 @@
@@ -289,9 +292,20 @@ index 214fb22..cd1092a 100644
         DocumentRoot "/mnt"
         ServerName archive.centrin.com.cn
         ErrorLog /var/log/httpd/centrin_archive_error.log
+@@ -9,7 +9,8 @@
+        <Directory "/mnt">
+                Options +Indexes
+                AllowOverride All
+-               Order deny,allow
+-               Allow from All
++               # Order deny,allow
++               # Allow from All
++               Require all granted
+        </Directory>
+ </VirtualHost>
 
 # 检查最终应用配置文件
-> cat /opt/rh/httpd24/root/etc/httpd/conf.d/file_server.conf
+> cat file_server.conf
 Listen *:8001
 # NameVirtualHost *:80
 # do not allow override of this value for the UI's Vhost as it should always be off when generating non-html content such as dynamic images
@@ -303,8 +317,26 @@ Listen *:8001
         <Directory "/mnt">
                 Options +Indexes
                 AllowOverride All
-                Order deny,allow
-                Allow from All
+                # Order deny,allow
+                # Allow from All
+                Require all granted
         </Directory>
 </VirtualHost>
+```
+
+### 启动 HTTPD 2.4 服务
+
+> 启动服务之前，请确保 `防火墙` 和 `SELINUX` 已经关闭。
+
+```bash
+# 重启 httpd 2.4
+> service httpd24-httpd restart
+Stopping httpd:                                            [FAILED]
+Starting httpd: AH00558: httpd: Could not reliably determine the servers fully qualified domain name, using 10.0.3.50. Set the 'ServerName' directive globally to suppress this message
+                                                           [  OK  ]
+# 重启 httpd 2.2 保证 2.2 正常
+> service httpd restart
+Stopping httpd:                                            [  OK  ]
+Starting httpd: httpd: Could not reliably determine the servers fully qualified domain name, using 10.0.3.50 for ServerName
+                                                           [  OK  ]                                                     
 ```
