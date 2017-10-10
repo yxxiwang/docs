@@ -340,3 +340,11 @@ Stopping httpd:                                            [  OK  ]
 Starting httpd: httpd: Could not reliably determine the servers fully qualified domain name, using 10.0.3.50 for ServerName
                                                            [  OK  ]                                                     
 ```
+
+### 检查
+
+> 浏览器输入 `http://${ip}:8001/mfs/` 可以显示文件目录。
+>
+> **注意：若未显示出来内容，请先确保该服务器的 `防火墙` 和 `SELIUNX` 已经关闭。**
+
+![](assets/markdown-img-paste-20171010160723648.png)
