@@ -218,7 +218,7 @@ total 40
 -rw-r--r-- 1 root root 11909 Oct 10 15:07 httpd.conf.raw
 -rw-r--r-- 1 root root 13077 Sep 25  2013 magic
 
-# 注释第 42 行（Listen 80 -> #Listen 80）
+# 注释第42行（Listen 80 -> #Listen 80）
 > vim httpd.conf
 
 # 查看修改内容
@@ -236,4 +236,75 @@ index 247901e..b013564 100644
 
  #
  # Dynamic Shared Object (DSO) Support
+```
+
+### 部署应用配置
+
+```bash
+# 移动配置文件到 httpd 2.4 配置目录中
+> mv /etc/httpd/conf.d/file_server.conf /opt/rh/httpd24/root/etc/httpd/conf.d/
+> cd /opt/rh/httpd24/root/etc/httpd/conf.d/
+
+# 检查
+> ll
+total 20
+-rw-r--r-- 1 root root 2933 Sep 25  2013 autoindex.conf
+-rw-r--r-- 1 root root  416 Oct 10 15:35 file_server.conf
+-rw-r--r-- 1 root root  366 Sep 25  2013 README
+-rw-r--r-- 1 root root 1252 Sep 25  2013 userdir.conf
+-rw-r--r-- 1 root root  556 Sep 25  2013 welcome.conf
+
+# 配置应用配置文件
+> cp file_server.conf file_server.conf.raw
+
+# 检查
+> ll
+total 24
+-rw-r--r-- 1 root root 2933 Sep 25  2013 autoindex.conf
+-rw-r--r-- 1 root root  416 Oct 10 15:35 file_server.conf
+-rw-r--r-- 1 root root  416 Oct 10 15:37 file_server.conf.raw
+-rw-r--r-- 1 root root  366 Sep 25  2013 README
+-rw-r--r-- 1 root root 1252 Sep 25  2013 userdir.conf
+-rw-r--r-- 1 root root  556 Sep 25  2013 welcome.conf
+
+# 修改应用配置文件
+#!# 为了不和 httpd 2.2 的 80 端口冲突，所以将文件服务器端口修改为 8001
+# 第1行添加 Listen *:8001
+# 第4行修改为 <VirtualHost *:8001>
+> vim file_server.conf
+
+# 对比原文件
+> git diff file_server.conf.raw file_server.conf
+diff --git a/file_server.conf.raw b/file_server.conf
+index 214fb22..cd1092a 100644
+--- a/file_server.conf.raw
++++ b/file_server.conf
+@@ -1,7 +1,7 @@
+-
++Listen *:8001
+ # NameVirtualHost *:80
+ # do not allow override of this value for the UI's Vhost as it should always be off when generating non-html content such as d
+-<VirtualHost *:80>
++<VirtualHost *:8001>
+        DocumentRoot "/mnt"
+        ServerName archive.centrin.com.cn
+        ErrorLog /var/log/httpd/centrin_archive_error.log
+
+# 检查最终应用配置文件
+> cat /opt/rh/httpd24/root/etc/httpd/conf.d/file_server.conf
+Listen *:8001
+# NameVirtualHost *:80
+# do not allow override of this value for the UI's Vhost as it should always be off when generating non-html content such as dynamic images
+<VirtualHost *:8001>
+        DocumentRoot "/mnt"
+        ServerName archive.centrin.com.cn
+        ErrorLog /var/log/httpd/centrin_archive_error.log
+
+        <Directory "/mnt">
+                Options +Indexes
+                AllowOverride All
+                Order deny,allow
+                Allow from All
+        </Directory>
+</VirtualHost>
 ```
