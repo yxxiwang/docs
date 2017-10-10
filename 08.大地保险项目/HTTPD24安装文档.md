@@ -104,3 +104,136 @@ httpd24-mod_session.x86_64              2.4.6-5.el6                 epel-httpd24
 httpd24-mod_ssl.x86_64                  1:2.4.6-5.el6               epel-httpd24
 httpd24-runtime.x86_64                  1-6.el6                     epel-httpd24
 ```
+
+### 安装 HTTPD 2.4
+
+```bash
+# 执行安装命令
+#!# 默认会安装在 /opt/rh/httpd24/ 文件夹中
+> yum -y install httpd24
+Loaded plugins: product-id, subscription-manager
+This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package httpd24.x86_64 0:1-6.el6 will be installed
+--> Processing Dependency: httpd24-httpd for package: httpd24-1-6.el6.x86_64
+--> Processing Dependency: httpd24-apr-util for package: httpd24-1-6.el6.x86_64
+--> Processing Dependency: httpd24-apr for package: httpd24-1-6.el6.x86_64
+--> Running transaction check
+---> Package httpd24-apr.x86_64 0:1.4.8-2.el6 will be installed
+--> Processing Dependency: httpd24-runtime for package: httpd24-apr-1.4.8-2.el6.x86_64
+---> Package httpd24-apr-util.x86_64 0:1.5.2-5.el6 will be installed
+---> Package httpd24-httpd.x86_64 0:2.4.6-5.el6 will be installed
+--> Processing Dependency: httpd24-httpd-tools = 2.4.6-5.el6 for package: httpd24-httpd-2.4.6-5.el6.x86_64
+--> Running transaction check
+---> Package httpd24-httpd-tools.x86_64 0:2.4.6-5.el6 will be installed
+---> Package httpd24-runtime.x86_64 0:1-6.el6 will be installed
+--> Processing Dependency: scl-utils for package: httpd24-runtime-1-6.el6.x86_64
+--> Running transaction check
+---> Package scl-utils.x86_64 0:20120927-8.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===============================================================================================================================
+ Package                             Arch                   Version                         Repository                    Size
+===============================================================================================================================
+Installing:
+ httpd24                             x86_64                 1-6.el6                         epel-httpd24                 2.2 k
+Installing for dependencies:
+ httpd24-apr                         x86_64                 1.4.8-2.el6                     epel-httpd24                  96 k
+ httpd24-apr-util                    x86_64                 1.5.2-5.el6                     epel-httpd24                  87 k
+ httpd24-httpd                       x86_64                 2.4.6-5.el6                     epel-httpd24                 1.1 M
+ httpd24-httpd-tools                 x86_64                 2.4.6-5.el6                     epel-httpd24                  73 k
+ httpd24-runtime                     x86_64                 1-6.el6                         epel-httpd24                 1.0 M
+ scl-utils                           x86_64                 20120927-8.el6                  rhel-media                    15 k
+
+Transaction Summary
+===============================================================================================================================
+Install       7 Package(s)
+
+Total download size: 2.4 M
+Installed size: 4.1 M
+Downloading Packages:
+(1/7): httpd24-1-6.el6.x86_64.rpm                                                                       | 2.2 kB     00:00     
+(2/7): httpd24-apr-1.4.8-2.el6.x86_64.rpm                                                               |  96 kB     00:00     
+(3/7): httpd24-apr-util-1.5.2-5.el6.x86_64.rpm                                                          |  87 kB     00:00     
+(4/7): httpd24-httpd-2.4.6-5.el6.x86_64.rpm                                                             | 1.1 MB     00:00     
+(5/7): httpd24-httpd-tools-2.4.6-5.el6.x86_64.rpm                                                       |  73 kB     00:00     
+(6/7): httpd24-runtime-1-6.el6.x86_64.rpm                                                               | 1.0 MB     00:00     
+(7/7): scl-utils-20120927-8.el6.x86_64.rpm                                                              |  15 kB     00:00     
+-------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                           13 MB/s | 2.4 MB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : scl-utils-20120927-8.el6.x86_64                                                                             1/7
+  Installing : httpd24-runtime-1-6.el6.x86_64                                                                              2/7
+  Installing : httpd24-apr-1.4.8-2.el6.x86_64                                                                              3/7
+  Installing : httpd24-apr-util-1.5.2-5.el6.x86_64                                                                         4/7
+  Installing : httpd24-httpd-tools-2.4.6-5.el6.x86_64                                                                      5/7
+  Installing : httpd24-httpd-2.4.6-5.el6.x86_64                                                                            6/7
+  Installing : httpd24-1-6.el6.x86_64                                                                                      7/7
+  Verifying  : httpd24-httpd-2.4.6-5.el6.x86_64                                                                            1/7
+  Verifying  : scl-utils-20120927-8.el6.x86_64                                                                             2/7
+  Verifying  : httpd24-httpd-tools-2.4.6-5.el6.x86_64                                                                      3/7
+  Verifying  : httpd24-1-6.el6.x86_64                                                                                      4/7
+  Verifying  : httpd24-runtime-1-6.el6.x86_64                                                                              5/7
+  Verifying  : httpd24-apr-util-1.5.2-5.el6.x86_64                                                                         6/7
+  Verifying  : httpd24-apr-1.4.8-2.el6.x86_64                                                                              7/7
+
+Installed:
+  httpd24.x86_64 0:1-6.el6                                                                                                     
+
+Dependency Installed:
+  httpd24-apr.x86_64 0:1.4.8-2.el6             httpd24-apr-util.x86_64 0:1.5.2-5.el6     httpd24-httpd.x86_64 0:2.4.6-5.el6    
+  httpd24-httpd-tools.x86_64 0:2.4.6-5.el6     httpd24-runtime.x86_64 0:1-6.el6          scl-utils.x86_64 0:20120927-8.el6     
+
+Complete!
+
+# 检查
+> /opt/rh/httpd24/root/usr/sbin/httpd -v
+Server version: Apache/2.4.6 (Red Hat)
+Server built:   Sep 25 2013 05:25:46
+```
+
+### 修改配置文件
+
+> 在 **背景说明** 中已经说明需要和 `2.2` 共存，所以这里需要将 `2.4` 的 `80` 端口关闭，目的是为了不和 `2.2` 的端口冲突。
+
+```bash
+# 备份配置文件
+> cd /opt/rh/httpd24/root/etc/httpd/conf
+> ll
+total 28
+-rw-r--r-- 1 root root 11909 Sep 25  2013 httpd.conf
+-rw-r--r-- 1 root root 13077 Sep 25  2013 magic
+
+> cp httpd.conf httpd.conf.raw
+> ll
+total 40
+-rw-r--r-- 1 root root 11909 Sep 25  2013 httpd.conf
+-rw-r--r-- 1 root root 11909 Oct 10 15:07 httpd.conf.raw
+-rw-r--r-- 1 root root 13077 Sep 25  2013 magic
+
+# 注释第 42 行（Listen 80 -> #Listen 80）
+> vim httpd.conf
+
+# 查看修改内容
+> diff httpd.conf.raw httpd.conf
+diff --git a/httpd.conf.raw b/httpd.conf
+index 247901e..b013564 100644
+--- a/httpd.conf.raw
++++ b/httpd.conf
+@@ -39,7 +39,7 @@ ServerRoot "/opt/rh/httpd24/root/etc/httpd"
+ # prevent Apache from glomming onto all bound IP addresses.
+ #
+ #Listen 12.34.56.78:80
+-Listen 80
++#Listen 80
+
+ #
+ # Dynamic Shared Object (DSO) Support
+```
