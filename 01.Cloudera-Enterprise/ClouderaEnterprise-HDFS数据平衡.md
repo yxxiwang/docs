@@ -208,7 +208,8 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
                 --- NOTE: The new value is not persistent on the DataNode.---
 [...]
 
-# 执行限制数据平衡宽带命令
+# 执行限制数据平衡传数据输宽带命令
+# 单位是 bytes，下文是 5MB/s
 > sudo -u hdfs hdfs dfsadmin -setBalancerBandwidth 5242880
 ```
 
