@@ -220,3 +220,8 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 ![](assets/markdown-img-paste-20171026124605221.png)
 
 ![](assets/markdown-img-paste-20171026124624841.png)
+
+## 参考文档
+
+- [Cloudera Enterprise 官方文档，HDFS Balancers。](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_hdfs_balancer.html)
+- [IBM developerWorks，HDFS 数据平衡规则及实验介绍。](https://www.ibm.com/developerworks/cn/data/library/bd-1506-hdfsdatabalance/index.html)
