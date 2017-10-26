@@ -128,3 +128,37 @@ Last contact: Thu Oct 26 11:47:06 CST 2017
 [...]
 
 ```
+
+#### 添加 Balancer 服务
+
+![](assets/markdown-img-paste-20171026115129555.png)
+
+![](assets/markdown-img-paste-20171026115159754.png)
+
+![](assets/markdown-img-paste-20171026115213185.png)
+
+#### 配置 Balancer 服务
+
+![](assets/markdown-img-paste-20171026115240543.png)
+
+![](assets/markdown-img-paste-20171026115250546.png)
+
+![](assets/markdown-img-paste-20171026115303679.png)
+
+> 我们这里为了更容易可以看到数据平衡的效果，将该值修改为 `1%`，默认值为 `10%`。
+
+![](assets/markdown-img-paste-20171026115329226.png)
+
+> 这里限制网络传输速度为 `1MB/s`。
+
+![](assets/markdown-img-paste-20171026115545849.png)
+
+![](assets/markdown-img-paste-20171026115629256.png)
+
+#### 执行数据平衡
+
+![](assets/markdown-img-paste-20171026115734417.png)
+
+![](assets/markdown-img-paste-20171026115746506.png)
+
+![](assets/markdown-img-paste-20171026115756601.png)
