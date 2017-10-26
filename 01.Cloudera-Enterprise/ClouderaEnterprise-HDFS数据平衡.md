@@ -1,5 +1,9 @@
 # Cloudera Enterprise HDFS 数据平衡
 
+## 作者
+
+**@author: `anxu@centrin.com.cn` || `axu.home@gmail.com`**
+
 ## HDFS 数据平衡原理
 
 ## 测试使用 HDFS 官方脚本执行数据平衡（未测试）
