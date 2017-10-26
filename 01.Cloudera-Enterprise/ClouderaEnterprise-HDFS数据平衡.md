@@ -162,3 +162,45 @@ Last contact: Thu Oct 26 11:47:06 CST 2017
 ![](assets/markdown-img-paste-20171026115746506.png)
 
 ![](assets/markdown-img-paste-20171026115756601.png)
+
+> 这里可以点击 `"关闭"` 按钮，不会影响数据平衡任务执行。
+
+```bash
+# 这里可以再次使用命令查看新的 DataNode（dn10）的 DFS Used% 参数，检查是否已经开始同步。
+> sudo -u hdfs hdfs dfsadmin -report
+
+[...]
+
+Name: 10.0.3.70:50010 (dn10)
+Hostname: dn10
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 947863429120 (882.77 GB)
+DFS Used: 2084555710 (1.94 GB)
+Non DFS Used: 45109011522 (42.01 GB)
+DFS Remaining: 900669861888 (838.81 GB)
+DFS Used%: 0.22%
+DFS Remaining%: 95.02%
+Last contact: Thu Oct 26 12:01:57 CST 2017
+
+[...]
+
+```
+
+#### 终止数据平衡
+
+![](assets/markdown-img-paste-20171026123624343.png)
+
+#### 重启 HDFS
+
+> 重启 HDFS 的目的是为了使 配置（`hdfs-site.xml`）参数 `网络流量限制（dfs.balance.bandwidthPerSec）` 生效。
+
+![](assets/markdown-img-paste-20171026124223479.png)
+
+![](assets/markdown-img-paste-20171026124516197.png)
+
+#### 再次执行数据平衡任务
+
+![](assets/markdown-img-paste-20171026124605221.png)
+
+![](assets/markdown-img-paste-20171026124624841.png)
