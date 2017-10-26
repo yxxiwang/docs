@@ -191,7 +191,7 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 
 ![](assets/markdown-img-paste-20171026131502780.png)
 
-#### 限制数据平衡带宽
+#### 限制数据平衡数据传输带宽
 
 ```bash
 # 查看帮助信息
