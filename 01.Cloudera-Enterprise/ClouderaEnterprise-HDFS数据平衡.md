@@ -151,6 +151,8 @@ Last contact: Thu Oct 26 11:47:06 CST 2017
 
 #### 启动数据平衡任务
 
+> 在 `Cloudera Manager 4.8.0` 版本中，默认数据平衡带宽为 `10MB/s`。
+
 ![](assets/markdown-img-paste-20171026115734417.png)
 
 ![](assets/markdown-img-paste-20171026115746506.png)
