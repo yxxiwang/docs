@@ -83,3 +83,48 @@ DFS Used%: 22.85%
 DFS Remaining%: 26.69%
 Last contact: Thu Oct 26 11:23:48 CST 2017
 ```
+
+### 测试步骤
+
+#### 将新的节点添加到 HDFS 集群
+
+> 在本次测试前已经完成将新服务器添加到 `Cloudera Enterpr` 中，只是还未将其添加到 `HDFS` 集群中。
+
+![](assets/markdown-img-paste-20171026114140384.png)
+
+![](assets/markdown-img-paste-2017102611415863.png)
+
+![](assets/markdown-img-paste-20171026114250772.png)
+
+![](assets/markdown-img-paste-20171026114522605.png)
+
+![](assets/markdown-img-paste-20171026114559289.png)
+
+![](assets/markdown-img-paste-20171026114612572.png)
+
+![](assets/markdown-img-paste-20171026114646751.png)
+
+![](assets/markdown-img-paste-20171026114700185.png)
+
+```bash
+# 使用命令查看，这里发现新的 DataNode（dn10）节点
+# 这里可以看到新的 DataNode（dn10）节点的 DFS Used% 为 0.00%，表示现在节点上没有数据。
+> sudo -u hdfs hdfs dfsadmin -report
+
+[...]
+
+Name: 10.0.3.70:50010 (dn10)
+Hostname: dn10
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 947863429120 (882.77 GB)
+DFS Used: 24576 (24 KB)
+Non DFS Used: 44545314816 (41.49 GB)
+DFS Remaining: 903318089728 (841.28 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 95.30%
+Last contact: Thu Oct 26 11:47:06 CST 2017
+
+[...]
+
+```
