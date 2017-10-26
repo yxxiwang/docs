@@ -147,15 +147,9 @@ Last contact: Thu Oct 26 11:47:06 CST 2017
 
 > 我们这里为了更容易可以看到数据平衡的效果，将该值修改为 `1%`，默认值为 `10%`。
 
-![](assets/markdown-img-paste-20171026115329226.png)
+![](assets/markdown-img-paste-20171026133056861.png)
 
-> 这里限制网络传输速度为 `1MB/s`。
-
-![](assets/markdown-img-paste-20171026115545849.png)
-
-![](assets/markdown-img-paste-20171026115629256.png)
-
-#### 执行数据平衡
+#### 启动数据平衡任务
 
 ![](assets/markdown-img-paste-20171026115734417.png)
 
@@ -187,19 +181,38 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 
 ```
 
-#### 终止数据平衡
+#### 终止数据平衡任务
 
-![](assets/markdown-img-paste-20171026123624343.png)
+![](assets/markdown-img-paste-20171026131416346.png)
 
-#### 重启 HDFS
+![](assets/markdown-img-paste-20171026131426466.png)
 
-> 重启 HDFS 的目的是为了使 配置（`hdfs-site.xml`）参数 `网络流量限制（dfs.balance.bandwidthPerSec）` 生效。
+![](assets/markdown-img-paste-20171026131454146.png)
 
-![](assets/markdown-img-paste-20171026124223479.png)
+![](assets/markdown-img-paste-20171026131502780.png)
 
-![](assets/markdown-img-paste-20171026124516197.png)
+#### 限制数据平衡带宽
 
-#### 再次执行数据平衡任务
+```bash
+# 查看帮助信息
+> sudo -u hdfs hdfs dfsadmin -help
+[...]
+-setBalancerBandwidth <bandwidth>:
+        Changes the network bandwidth used by each datanode during
+        HDFS block balancing.
+
+                <bandwidth> is the maximum number of bytes per second
+                that will be used by each datanode. This value overrides
+                the dfs.balance.bandwidthPerSec parameter.
+
+                --- NOTE: The new value is not persistent on the DataNode.---
+[...]
+
+# 执行限制数据平衡宽带命令
+> sudo -u hdfs hdfs dfsadmin -setBalancerBandwidth 5242880
+```
+
+#### 再次启动数据平衡任务
 
 ![](assets/markdown-img-paste-20171026124605221.png)
 
