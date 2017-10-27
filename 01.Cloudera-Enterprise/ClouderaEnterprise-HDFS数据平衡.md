@@ -264,6 +264,114 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 
 ![](assets/markdown-img-paste-20171026124624841.png)
 
+
+#### 执行任务完成
+
+> 可以通过执行以下步骤，查看执行命令 `是否成功` 以及 `执行时长`。
+
+![](assets/markdown-img-paste-20171027132309790.png)
+
+![](assets/markdown-img-paste-20171027132351669.png)
+
+### 测试结果
+
+#### 数据最终平衡情况
+
+```bash
+# 查看全部报告
+> sudo -u hdfs hdfs dfsadmin -report
+Configured Capacity: 5017928163328 (4.56 TB)
+Present Capacity: 3257481367552 (2.96 TB)
+DFS Remaining: 2327392804864 (2.12 TB)
+DFS Used: 930088562688 (866.21 GB)
+DFS Used%: 28.55%
+Under replicated blocks: 0
+Blocks with corrupt replicas: 0
+Missing blocks: 0
+
+-------------------------------------------------
+Datanodes available: 4 (4 total, 0 dead)
+
+Live datanodes:
+Name: 10.0.3.102:50010 (dn01)
+Hostname: dn01
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 1356688244736 (1.23 TB)
+DFS Used: 255424847872 (237.88 GB)
+Non DFS Used: 575541334016 (536.01 GB)
+DFS Remaining: 525722062848 (489.62 GB)
+DFS Used%: 18.83%
+DFS Remaining%: 38.75%
+Last contact: Fri Oct 27 13:26:25 CST 2017
+
+
+Name: 10.0.3.70:50010 (dn10)
+Hostname: dn10
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 947863429120 (882.77 GB)
+DFS Used: 170030972928 (158.35 GB)
+Non DFS Used: 44550672384 (41.49 GB)
+DFS Remaining: 733281783808 (682.92 GB)
+DFS Used%: 17.94%
+DFS Remaining%: 77.36%
+Last contact: Fri Oct 27 13:26:26 CST 2017
+
+
+Name: 10.0.3.103:50010 (dn02)
+Hostname: dn02
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 1356688244736 (1.23 TB)
+DFS Used: 253261131776 (235.87 GB)
+Non DFS Used: 572634652672 (533.31 GB)
+DFS Remaining: 530792460288 (494.34 GB)
+DFS Used%: 18.67%
+DFS Remaining%: 39.12%
+Last contact: Fri Oct 27 13:26:26 CST 2017
+
+
+Name: 10.0.3.104:50010 (dn03)
+Hostname: dn03
+Rack: /default
+Decommission Status : Normal
+Configured Capacity: 1356688244736 (1.23 TB)
+DFS Used: 251371610112 (234.11 GB)
+Non DFS Used: 567720136704 (528.73 GB)
+DFS Remaining: 537596497920 (500.68 GB)
+DFS Used%: 18.53%
+DFS Remaining%: 39.63%
+Last contact: Fri Oct 27 13:26:26 CST 2017
+
+# 查看各个节点 HDFS 使用率
+> sudo -u hdfs hdfs dfsadmin -report | grep -E "Name|DFS Used" | grep -v "Non"
+DFS Used: 930088562688 (866.21 GB)
+DFS Used%: 28.55%
+Name: 10.0.3.102:50010 (dn01)
+DFS Used: 255424847872 (237.88 GB)
+DFS Used%: 18.83%
+Name: 10.0.3.70:50010 (dn10)
+DFS Used: 170030972928 (158.35 GB)
+DFS Used%: 17.94%
+Name: 10.0.3.103:50010 (dn02)
+DFS Used: 253261131776 (235.87 GB)
+DFS Used%: 18.67%
+Name: 10.0.3.104:50010 (dn03)
+DFS Used: 251371610112 (234.11 GB)
+DFS Used%: 18.53%
+```
+
+#### 流量监控
+
+> 我们在这里分别监控了所有服务器以及整体集群的 `网络接收` `网络发送` `使用磁盘量` `磁盘度` `磁盘写`。
+
+![](assets/markdown-img-paste-2017102713312025.png)
+
+### 结论
+
+ 1. **通过 `数据最终平衡情况` 结果可以看出 HDFS 已经完成数据平衡到我们设置的阈值（1%）内。**
+
 ## 参考文档
 
 - [Cloudera Enterprise 官方文档，HDFS Balancers。](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_hdfs_balancer.html)
