@@ -275,6 +275,17 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 
 ### 测试结果
 
+#### 测试目标结果
+
+测试目标|是否成功
+-|-
+测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡是否可以成功。 | Y
+测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡是否可以手动停止。 | Y
+测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡在停止状态下是否可以启动继续执行。 | Y
+测试 `HDFS` 数据平衡 命令参数 `重新平衡阈值（-threshold）` 是否启作用。 | Y
+测试 `HDFS` 数据平衡 配置（`hdfs-site.xml`）参数 `网络流量限制（dfs.balance.bandwidthPerSec）` 是否启作用。 | N
+测试 `HDFS` 数据平衡 命令参数 `网络流量限制（-setBalancerBandwidth）` 是否启作用。 | Y
+
 #### 数据最终平衡情况
 
 ```bash
@@ -374,20 +385,7 @@ DFS Used%: 18.53%
 
 ![](assets/markdown-img-paste-20171027135452296.png)
 
-### 测试结果
-
-#### 测试目标结果
-
-测试目标|是否成功
--|-
-测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡是否可以成功。 | Y
-测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡是否可以手动停止。 | Y
-测试使用 `Cloudera Enterprise` 执行 `HDFS` 数据平衡在停止状态下是否可以启动继续执行。 | Y
-测试 `HDFS` 数据平衡 命令参数 `重新平衡阈值（-threshold）` 是否启作用。 | Y
-测试 `HDFS` 数据平衡 配置（`hdfs-site.xml`）参数 `网络流量限制（dfs.balance.bandwidthPerSec）` 是否启作用。 | N
-测试 `HDFS` 数据平衡 命令参数 `网络流量限制（-setBalancerBandwidth）` 是否启作用。 | Y
-
-#### 测试结论
+### 结论
 
  1. **通过 `数据最终平衡情况` 结果可以看出 HDFS 已经完成数据平衡到我们设置的阈值（1%）内。**
  2. **使用 `sudo -u hdfs hdfs dfsadmin -setBalancerBandwidth 5242880` 命令进行网络限速，并且不需要重启 `HDSF` 集群。**
