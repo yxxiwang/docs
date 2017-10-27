@@ -226,7 +226,7 @@ Last contact: Thu Oct 26 12:01:57 CST 2017
 
 ```
 
-#### 终止数据平衡任务
+#### 中止数据平衡任务
 
 ![](assets/markdown-img-paste-20171026131416346.png)
 
