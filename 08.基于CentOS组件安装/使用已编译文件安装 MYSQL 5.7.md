@@ -23,20 +23,13 @@
 > chown -R mysql .
 > chgrp -R mysql .
 > yum -y install libaio libaio-devel
-> bin/mysqld --initialize --user=mysql
-> mkdir -p /var/run/mysqld
-> chown -R mysql:mysql /var/run/mysqld
-> bin/mysqld_safe --user=mysql &
-
-# 拷贝以后就可以使用`service`命令启停服务了，例如重启服务`service mysql.server restart`
-> cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
 ## 修改配置
 
 ```bash
 # 修改配置（改成和下面一致）
-> vim /etc/my.cnf 
+> vim /etc/my.cnf
 ```
 
 ```bash
@@ -74,6 +67,18 @@ export PATH=${MYSQL_HOME}/bin:${PATH}
 # 检查
 > mysql --version
 mysql  Ver 14.14 Distrib 5.7.16, for linux-glibc2.5 (x86_64) using  EditLine wrapper
+```
+
+## 初始化
+
+```bash
+> bin/mysqld --initialize --user=mysql
+> mkdir -p /var/run/mysqld
+> chown -R mysql:mysql /var/run/mysqld
+> bin/mysqld_safe --user=mysql &
+
+# 拷贝以后就可以使用`service`命令启停服务了，例如重启服务`service mysql.server restart`
+> cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
 ## 创建用户以及赋权
@@ -156,15 +161,17 @@ socket=/var/lib/mysqld/mysqld.sock
 
 ### `root`用户密码忘记
 
+> 启动 `mysqld_safe --skip-grant-tables &` 需要保证当前没有 `mysql server` 启动
+
 ```bash
 # 首先需要停止`mysqld`服务器
 # 启动无需密码登陆模式
 > mysqld_safe --skip-grant-tables &
 # 进入数据库
-> mysql -uroot 
+> mysql -uroot
 # 修改`root`用户密码
 mysql> update mysql.user set authentication_string=PASSWORD('root123') where User='root';
-mysql> flush privileges; 
+mysql> flush privileges;
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 mysql> exit;
 ```
@@ -172,5 +179,3 @@ mysql> exit;
 > **特别注意：记住修改后要停止`--skip-grant-tables`的`mysqld`服务**
 
 `-EOF-`
-
-
